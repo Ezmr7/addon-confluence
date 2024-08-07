@@ -5,6 +5,10 @@ const meta: Meta<typeof Header> = {
   title: "Example/Header",
   component: Header,
   parameters: {
+    confluence: {
+      id: 164,
+      domain: 'ezekielmohr27'
+    },
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: "fullscreen",
   },

@@ -1,9 +1,12 @@
 {
-  "name": "Confluence Addon",
+  "name": "addon-confluence",
   "version": "0.0.0",
   "description": "An addon to implement Confluence documentation in StoryBook.",
   "keywords": [
-    "storybook-addons", "storybook-addons"
+    "storybook-addons",
+    "confluence",
+    "atlassian",
+    "documentation"
   ],
   "repository": {
     "type": "git",
@@ -23,7 +26,6 @@
       "import": "./dist/preview.js",
       "require": "./dist/preview.cjs"
     },
-    "./preset": "./dist/preset.cjs",
     "./manager": "./dist/manager.js",
     "./package.json": "./package.json"
   },
@@ -67,6 +69,7 @@
     "auto": "^11.1.1",
     "boxen": "^7.1.1",
     "dedent": "^1.5.1",
+    "http-proxy-middleware": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.2.5",
     "prompts": "^2.4.2",
@@ -90,16 +93,24 @@
     ],
     "previewEntries": [
       "src/preview.ts"
-    ],
-    "nodeEntries": [
-      "src/preset.ts"
     ]
   },
   "storybook": {
-    "displayName": "confluence-addon",
+    "displayName": "Confluence Docs",
     "supportedFrameworks": [
-      "react", "vue", "angular", "web-components", "ember", "html", "svelte", "preact", "react-native"
+      "react",
+      "vue",
+      "angular",
+      "web-components",
+      "ember",
+      "html",
+      "svelte",
+      "preact",
+      "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }

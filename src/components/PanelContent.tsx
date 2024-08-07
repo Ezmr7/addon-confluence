@@ -1,76 +1,35 @@
-import React, { Fragment } from "react";
-import { styled, themes, convert } from "@storybook/theming";
-import { TabsState, Placeholder, Button } from "@storybook/components";
-import { List } from "./List";
+import React, { useEffect, useState } from "react";
+import { useParameter } from "@storybook/manager-api"
+import { styled } from "@storybook/theming";
+import { Button } from "@storybook/components";
 
 export const RequestDataButton = styled(Button)({
   marginTop: "1rem",
 });
 
-type Results = {
-  danger: any[];
-  warning: any[];
-};
-
-interface PanelContentProps {
-  results: Results;
-  fetchData: () => void;
-  clearData: () => void;
-}
 
 /**
  * Checkout https://github.com/storybookjs/storybook/blob/next/code/addons/jest/src/components/Panel.tsx
  * for a real world example
  */
-export const PanelContent: React.FC<PanelContentProps> = ({
-  results,
-  fetchData,
-  clearData,
-}) => (
-  <TabsState
-    initial="overview"
-    backgroundColor={convert(themes.normal).background.hoverable}
-  >
-    <div
-      id="overview"
-      title="Overview"
-      color={convert(themes.normal).color.positive}
-    >
-      <Placeholder>
-        <Fragment>
-          Addons can gather details about how a story is rendered. This is panel
-          uses a tab pattern. Click the button below to fetch data for the other
-          two tabs.
-        </Fragment>
-        <Fragment>
-          <RequestDataButton
-            secondary
-            small
-            onClick={fetchData}
-            style={{ marginRight: 16 }}
-          >
-            Request data
-          </RequestDataButton>
+export const PanelContent = ({}) => {
+  
+  const [data, setData]= useState("<p style=\"color: white; font-size: 125%;\">Loading...</p>")
 
-          <RequestDataButton outline small onClick={clearData}>
-            Clear data
-          </RequestDataButton>
-        </Fragment>
-      </Placeholder>
+  const page = useParameter('confluence', {id: '0', domain: 'none'});
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(`/confluence?id=${page.id}&domain=${page.domain}`);
+      setData("<div style=\"color: white; font-size: 125%;\">" + await response.json() + "</div>");
+      console.log(typeof data);
+    }
+    getData();
+  }, [page])
+
+  return (
+    <div id="pageFrame">
+      <iframe id="iframe" loading="lazy" height="100%" width="100%" frameBorder="0"style={{overflow:"hidden", height:"1000px", width:"100%"}} srcDoc={data} title="Confluence Docs"></iframe>
     </div>
-    <div
-      id="danger"
-      title={`${results.danger.length} Danger`}
-      color={convert(themes.normal).color.negative}
-    >
-      <List items={results.danger} />
-    </div>
-    <div
-      id="warning"
-      title={`${results.warning.length} Warning`}
-      color={convert(themes.normal).color.warning}
-    >
-      <List items={results.warning} />
-    </div>
-  </TabsState>
-);
+  );
+}
