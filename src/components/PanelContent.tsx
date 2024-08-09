@@ -22,14 +22,14 @@ export const PanelContent = ({}) => {
     const getData = async () => {
       const response = await fetch(`/confluence?id=${page.id}&domain=${page.domain}`);
       setData("<div style=\"color: white; font-size: 125%;\">" + await response.json() + "</div>");
-      console.log(typeof data);
     }
     getData();
   }, [page])
 
   return (
-    <div id="pageFrame">
-      <iframe id="iframe" loading="lazy" height="100%" width="100%" frameBorder="0"style={{overflow:"hidden", height:"1000px", width:"100%"}} srcDoc={data} title="Confluence Docs"></iframe>
+    <div id="pageFrame" dangerouslySetInnerHTML={{__html:data}}>
     </div>
   );
 }
+
+// Old method for displaying addon data -> <iframe id="iframe" loading="lazy" height="100vh" width="100%" frameBorder="0"style={{overflow:"hidden", height:"100vh", width:"100%"}} srcDoc={data} title="Confluence Docs"></iframe>
