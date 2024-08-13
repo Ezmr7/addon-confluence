@@ -1,6 +1,6 @@
 {
   "name": "addon-confluence",
-  "version": "0.0.14",
+  "version": "0.0.13",
   "description": "An addon to implement Confluence documentation in StoryBook.",
   "keywords": [
     "storybook-addons",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ezmr7/Addon"
+    "url": "https://github.com/Ezmr7/addon-confluence"
   },
   "type": "module",
   "license": "MIT",
@@ -66,7 +66,7 @@
     "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
     "@vitejs/plugin-react": "^4.2.1",
-    "auto": "^11.1.1",
+    "auto": "^11.2.0",
     "boxen": "^7.1.1",
     "dedent": "^1.5.1",
     "http-proxy-middleware": "^3.0.0",
