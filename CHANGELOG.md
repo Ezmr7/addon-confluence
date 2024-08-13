@@ -1,3 +1,15 @@
+# v0.0.18 (Tue Aug 13 2024)
+
+#### 🐛 Bug Fix
+
+- [JR] - Cleanup Middleware file, fix error from getConfluencePage [#2](https://github.com/Ezmr7/addon-confluence/pull/2) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.17 (Tue Aug 13 2024)
 
 #### ⚠️ Pushed to `main`
