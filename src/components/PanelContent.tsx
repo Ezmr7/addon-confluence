@@ -20,8 +20,10 @@ export const PanelContent = ({}) => {
 
   useEffect(() => {
     const getData = async () => {
+      console.log("This be request:");
       const response = await fetch(`/confluence?id=${page.id}&domain=${page.domain}`);
       setData("<div style=\"color: white; font-size: 125%;\">" + await response.json() + "</div>");
+      console.log("This be response:", response);
     }
     getData();
   }, [page])
