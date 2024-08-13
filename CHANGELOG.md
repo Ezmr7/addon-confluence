@@ -1,3 +1,15 @@
+# v0.0.17 (Tue Aug 13 2024)
+
+#### ⚠️ Pushed to `main`
+
+- Updated README.md (ezekielmohr27@gmail.com)
+
+#### Authors: 1
+
+- Ezekiel Mohr (ezekielmohr27@gmail.com)
+
+---
+
 # v0.0.16 (Tue Aug 13 2024)
 
 #### 🐛 Bug Fix
