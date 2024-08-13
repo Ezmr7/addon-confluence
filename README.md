@@ -26,7 +26,7 @@ export default {
 
 ```env
 CONFLUENCE_EMAIL = youremail@example.com
-CONFLUENCE_TOKEN = YourTokenHere
+CONFLUENCE_TOKEN = YourTokenHere!
 ```
 
 ### 4. Add a middleware.js file to your .storybook folder, and copy this code to it
