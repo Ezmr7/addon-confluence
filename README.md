@@ -13,11 +13,11 @@ yarn add -D addon-confluence
 pnpm add -D addon-confluence
 ```
 
-### 2. Register the addon in `main.js`
+### 2. Register the addon in `.storybook/main.js"
 
 ```js
 export default {
-  addons: ["@storybook/addon-confluence"],
+  addons: ["addon-confluence"],
 };
 ```
 ### 3. Create a token for Confluence!
@@ -29,20 +29,12 @@ CONFLUENCE_EMAIL = youremail@example.com
 CONFLUENCE_TOKEN = YourTokenHere
 ```
 
-### 4. Add a middleware.js file to your .storybook folder, and copy this code to it.
+### 4. Add a middleware.js file to your .storybook folder, and copy this code to it
 
-#### The file name must be "middleware.js". This is an undocumented method for injecting routes into the Storybook Express.js server. This step is necessary to prevent CORS issues due to the browser trying to access different origins from local host.
+#### The file name must be "middleware.js". This is an undocumented method for injecting routes into the Storybook Express.js server. This step is necessary to prevent CORS issues due to the browser trying to access different origins from local host. Ensure the file name is correct, or else Storybook will not recognize it.
 
-```middleware.js
-// middleware.js is the necessary file name for accessing the backend of Storybook, which gives the ability to proxy requests and avoid CORS blocking.
-
-require("dotenv").config();
-
-module.exports = function expressMiddleware(router) {
-	router.get("/confluence", getConfluencePage, (req, res) => {
-        return res.status(200).json(res.locals.page);
-    });
-};
+```js
+module.exports = require("addon-confluence");
 ```
 
 ### 5. Add it to a story!
