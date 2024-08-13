@@ -27,8 +27,10 @@ const getConfluencePage = async (req:any, res:any, next:any) => {
     }
   }
 
-export const confluenceMiddleware = (router:any) => {
+const confluenceMiddleware = (router:any) => {
     router.get("/confluence", getConfluencePage, (req:any, res:any) => {
         return res.status(200).json(res.locals.page);
     });
 };
+
+export default confluenceMiddleware;
