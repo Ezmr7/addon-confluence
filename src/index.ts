@@ -1,5 +1,4 @@
-// make it work with --isolatedModules
-import { Request, Response, NextFunction, Router } from "express";
+import { Request, Response, NextFunction } from "express";
 require("dotenv").config();
 
 const CONFLUENCE_AUTHORIZATION = btoa(
@@ -42,7 +41,7 @@ const getConfluencePage = async (
   }
 };
 
-const confluenceMiddleware = (router: Router): void => {
+const confluenceMiddleware = (router: any): void => {
   router.get(
     "/confluence",
     getConfluencePage,
