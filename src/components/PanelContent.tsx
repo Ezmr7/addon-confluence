@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParameter } from "@storybook/manager-api";
+import { styled } from "@storybook/theming";
+import { Button } from "@storybook/components";
+
+export const RequestDataButton = styled(Button)({
+  marginTop: "1rem",
+});
 
 /**
  * Checkout https://github.com/storybookjs/storybook/blob/next/code/addons/jest/src/components/Panel.tsx
@@ -10,32 +16,21 @@ export const PanelContent = ({}) => {
     '<p style="color: white; font-size: 125%;">Loading...</p>',
   );
 
-  const page = useParameter("confluence", { id: null, domain: null });
+  const page = useParameter("confluence", { id: "0", domain: "none" });
 
   useEffect(() => {
-
-    if (!page.id || !page.domain) {
-      setData(
-        '<div style="color: white; font-size: 125%;"><p>Missing Confluence id or domain parameters. Please refer to the <a href="https://storybook.js.org/addons/addon-confluence">documentation</a>.</p></div>'
-      )
-      return;
-    }
-
     const getData = async () => {
       const response = await fetch(
         `/confluence?id=${page.id}&domain=${page.domain}`,
       );
-
       setData(
         '<div style="color: white; font-size: 125%;">' +
           (await response.json()) +
-          '</div>',
+          "</div>",
       );
     };
-
     getData();
-
-  }, [page.id, page.domain]);
+  }, [page]);
 
   return <div id="pageFrame" dangerouslySetInnerHTML={{ __html: data }}></div>;
 };
