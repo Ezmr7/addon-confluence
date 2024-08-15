@@ -29,7 +29,6 @@ const getConfluencePage = async (
 ): Promise<void> => {
 
   try {
-
     const { id, domain } = req.query;
     const url = `https://${domain}.atlassian.net/wiki/api/v2/pages/${id}?body-format=view`;
 
@@ -37,6 +36,8 @@ const getConfluencePage = async (
     const data = await response.json();
 
     res.locals.page = data.body.view.value || "<p>No content found.</p>"
+
+    next();
 
   } 
   
