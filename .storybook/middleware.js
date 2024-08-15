@@ -1,5 +1,4 @@
-// This file is not part of addon-conflunce. Its purpose for efficient development and testing. Finished and tested code should be added to src/index.ts.
-// middleware.js is the necessary file name for accessing the backend of Storybook, which gives the ability to proxy requests and avoid CORS blocking
+// middleware.js is the necessary file name for accessing the backend of Storybook, which gives the ability to proxy requests and avoid CORS blocking.
 
 const express = require("express");
 const fetch = require("node-fetch");
@@ -10,12 +9,14 @@ const CONFLUENCE_AUTHORIZATION = Buffer.from(
 ).toString("base64");
 
 const fetchPage = async (auth, url) => {
-
   const response = await fetch(url, {
     method: "GET",
     headers: {
+      "Access-Control-Allow-Origin": "*",
       Authorization: `Basic ${auth}`,
+      "Content-Type": "application/json",
     },
+    mode: "cors",
   });
 
   if (!response.ok) {
@@ -26,26 +27,25 @@ const fetchPage = async (auth, url) => {
 };
 
 const getConfluencePage = async (req, res, next) => {
-
   try {
-
     const { id, domain } = req.query;
-    const url = `https://${domain}.atlassian.net/wiki/api/v2/pages/${id}?body-format=view`;
 
+    if (!id || !domain) {
+      res
+        .status(400)
+        .json({ error: "Missing required query parameters: id and domain" });
+      return;
+    }
+
+    const url = `https://${domain}.atlassian.net/wiki/api/v2/pages/${id}?body-format=view`;
     const response = await fetchPage(CONFLUENCE_AUTHORIZATION, url);
     const data = await response.json();
 
-    res.locals.page = data.body.view.value || "<p>No content found.</p>"
-
+    res.locals.page = data.body.view.value || "<p>No content found.</p>";
     next();
-
-  } 
-  
-  catch (error) {
-
+  } catch (error) {
     console.error("Error: In getConfluencePage middleware", error);
-    res.locals.page = "<p>No Confluence page found. Ensure parameters are input correctly.</p>";
-
+    res.locals.page = "<p>No Confluence page found.</p>";
     next();
   }
 };
