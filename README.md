@@ -53,7 +53,7 @@ export const myStory = {
   parameters: {
     confluence: {
       id: 12345,
-      domain: "your-username",
+      domain: "your-domain",
     },
   },
 };
