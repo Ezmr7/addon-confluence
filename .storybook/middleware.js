@@ -10,7 +10,7 @@ const CONFLUENCE_AUTHORIZATION = Buffer.from(
 ).toString("base64");
 
 const fetchPage = async (auth, url) => {
-  
+
   const response = await fetch(url, {
     method: "GET",
     headers: {
@@ -44,7 +44,6 @@ const getConfluencePage = async (req, res, next) => {
   catch (error) {
 
     console.error("Error: In getConfluencePage middleware", error);
-    
     res.locals.page = "<p>No Confluence page found. Ensure parameters are input correctly.</p>";
 
     next();
