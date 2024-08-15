@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParameter } from "@storybook/manager-api";
 
-/**
- * Checkout https://github.com/storybookjs/storybook/blob/next/code/addons/jest/src/components/Panel.tsx
- * for a real world example
- */
 export const PanelContent = ({}) => {
   const [data, setData] = useState(
     '<p style="color: white; font-size: 125%;">Loading...</p>',
