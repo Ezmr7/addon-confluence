@@ -1,3 +1,18 @@
+# v0.0.21 (Fri Aug 16 2024)
+
+#### ⚠️ Pushed to `main`
+
+- Merge branch 'main' of https://github.com/Ezmr7/addon-confluence (ezekielmohr27@gmail.com)
+- Moved exception handling for missing parameters to src/components/PanelContent.tsx and removed unnecessary headers in fetch. (ezekielmohr27@gmail.com)
+- Fixed issue with useEffect dependencies, added exception handling for missing parameters, removed and cleaned excess code (ezekielmohr27@gmail.com)
+- Moved exception handling for missing parameters to src/components/PanelContent.tsx (ezekielmohr27@gmail.com)
+
+#### Authors: 1
+
+- Ezekiel Mohr (ezekielmohr27@gmail.com)
+
+---
+
 # v0.0.20 (Thu Aug 15 2024)
 
 #### 🐛 Bug Fix
