@@ -1,3 +1,31 @@
+# v0.0.20 (Thu Aug 15 2024)
+
+#### 🐛 Bug Fix
+
+- Revert "Changed exception handling for missing parameters and fixed issue with useEffect dependencies causing too many re-render cycles." [#4](https://github.com/Ezmr7/addon-confluence/pull/4) ([@Ezmr7](https://github.com/Ezmr7))
+
+#### Authors: 1
+
+- Ezekiel Mohr ([@Ezmr7](https://github.com/Ezmr7))
+
+---
+
+# v0.0.19 (Thu Aug 15 2024)
+
+#### 🐛 Bug Fix
+
+- Changed exception handling for missing parameters and fixed issue with useEffect dependencies causing too many re-render cycles. [#3](https://github.com/Ezmr7/addon-confluence/pull/3) (ezekielmohr27@gmail.com)
+
+#### ⚠️ Pushed to `main`
+
+- Update README.md (ezekielmohr27@gmail.com)
+
+#### Authors: 1
+
+- Ezekiel Mohr ([@Ezmr7](https://github.com/Ezmr7))
+
+---
+
 # v0.0.18 (Tue Aug 13 2024)
 
 #### 🐛 Bug Fix
