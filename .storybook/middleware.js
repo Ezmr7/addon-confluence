@@ -1,5 +1,5 @@
 // This file is not part of addon-conflunce. Its purpose for efficient development and testing. Finished and tested code should be added to src/index.ts.
-// middleware.js is the necessary file name for accessing the backend of Storybook, which gives the ability to proxy requests and avoid CORS blocking.
+// middleware.js is the necessary file name for accessing the backend of Storybook, which gives the ability to proxy requests and avoid CORS blocking.  
 
 const express = require("express");
 const fetch = require("node-fetch");
@@ -55,5 +55,3 @@ module.exports = function expressMiddleware(router) {
     res.status(200).json(res.locals.page);
   });
 };
-
-module.exports.getConfluencePage = getConfluencePage;
