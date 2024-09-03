@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParameter } from "@storybook/manager-api";
+import { IConfluencePageInfo } from "src/config";
 
-export const PanelContent = () => {
+export const PanelContent = ({
+  id = null,
+  domain = null,
+}: IConfluencePageInfo) => {
   const [data, setData] = useState(
     '<p style="color: inherit; font-size: 125%;">Loading...</p>',
   );
-
-  const page = useParameter("confluence", { id: null, domain: null });
+  const page = useParameter("confluence", { id: id, domain: domain });
 
   useEffect(() => {
+    if (!page) return null;
     const loadPageData = async () => {
       if (!page.id || !page.domain) {
         setData(
@@ -47,7 +51,7 @@ export const PanelContent = () => {
     };
 
     loadPageData();
-  }, [page.id, page.domain]);
+  }, [page?.id, page?.domain]);
 
   return (
     <div
