@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParameter } from "@storybook/manager-api";
 import { IConfluencePageInfo } from "src/config";
+import { useParameter } from "@storybook/manager-api";
 
 export const PanelContent = ({
   id = null,
