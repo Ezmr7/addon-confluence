@@ -1,3 +1,15 @@
+# v0.0.22 (Thu Sep 05 2024)
+
+#### 🐛 Bug Fix
+
+- UI changes, increased predictability, better developer workflow. [#8](https://github.com/Ezmr7/addon-confluence/pull/8) ([@Ezmr7](https://github.com/Ezmr7))
+
+#### Authors: 1
+
+- Ezekiel Mohr ([@Ezmr7](https://github.com/Ezmr7))
+
+---
+
 # v0.0.21 (Fri Aug 16 2024)
 
 #### ⚠️ Pushed to `main`
