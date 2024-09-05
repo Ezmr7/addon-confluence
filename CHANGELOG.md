@@ -1,3 +1,15 @@
+# v0.0.23 (Thu Sep 05 2024)
+
+#### 🐛 Bug Fix
+
+- Update ReadME, types. Add Confluence to Docs Page [#7](https://github.com/Ezmr7/addon-confluence/pull/7) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.22 (Thu Sep 05 2024)
 
 #### 🐛 Bug Fix
