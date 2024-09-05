@@ -51,7 +51,7 @@ export const PanelContent = ({
     };
 
     loadPageData();
-  }, [page?.id, page?.domain]);
+  }, [page.id, page.domain]);
 
   return (
     <div
