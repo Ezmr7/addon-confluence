@@ -29,6 +29,15 @@ const getConfluencePage = async (
 ): Promise<void> => {
 
   try {
+
+    // Missing authorization handling.
+    if (!process.env.CONFLUENCE_EMAIL || !process.env.CONFLUENCE_TOKEN){
+      console.error("addon-confluence Error: Missing authorization.")
+      res.locals.page = "<p>Error: Missing authorization. Ensure you are using a valid email and token.</p>"
+
+      return next();
+    }
+
     const { id, domain } = req.query;
     const url = `https://${domain}.atlassian.net/wiki/api/v2/pages/${id}?body-format=view`;
 
@@ -44,7 +53,7 @@ const getConfluencePage = async (
   catch (error) {
 
     console.error("Error: In getConfluencePage middleware", error);
-    res.locals.page = "<p>No Confluence page found. Ensure parameters are input correctly.</p>";
+    res.locals.page = "<p>No Confluence page found. Ensure parameters are correct.</p>";
 
     next();
 

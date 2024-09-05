@@ -8,9 +8,10 @@ import { Panel } from "./Panel";
  */
 
   // Register the panel
+addons.register(ADDON_ID, (api) => {
   addons.add(PANEL_ID, {
     type: types.PANEL,
     title: "Confluence",
-    match: ({ viewMode }) => viewMode === "story",
     render: Panel,
   });
+});
