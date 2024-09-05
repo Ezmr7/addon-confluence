@@ -1,4 +1,5 @@
 # Storybook Addon confluence-addon
+
 An addon to implement Confluence documentation in Storybook.
 
 ## Getting started
@@ -20,13 +21,14 @@ export default {
   addons: ["addon-confluence"],
 };
 ```
+
 ### 3. Create a token for Confluence!
 
 #### Go to this [link](https://id.atlassian.com/manage-profile/security/api-tokens) and create an API Token for your account. Then add it along with the email for your account to a .env file as so.
 
 ```env
-CONFLUENCE_EMAIL = youremail@example.com
-CONFLUENCE_TOKEN = YourTokenHere!
+CONFLUENCE_EMAIL=youremail@example.com
+CONFLUENCE_TOKEN=YourTokenHere!
 ```
 
 ### 4. Add a middleware.js file to your .storybook folder, and copy this code to it
@@ -37,10 +39,31 @@ CONFLUENCE_TOKEN = YourTokenHere!
 module.exports = require("addon-confluence");
 ```
 
-### 5. Add it to a story!
+### 5. Set Default Domain Globally (Optional)
 
-####  Now, the only needed information is the unique domain name and the numeric page id. You can find these within the url while viewing the desired Confluence page.
-#### For example: https://***<YOUR_DOMAIN>***.atlassian.net/wiki//pages/***<YOUR_PAGE_ID>***/Example_Page_Name
+### You can set the default Confluence domain at the top level in your preview.(js|ts) file, so you don’t need to specify it for every story. You can still override it at the story level if needed.
+
+```js
+const preview: Preview = {
+  parameters: {
+    confluence: {
+      domain: "your-domain",
+    },
+    backgrounds: {
+      default: "light",
+    },
+  },
+};
+
+export default preview;
+```
+
+### 6. Add it to a story!
+
+#### Now, the only needed information is the unique domain name and the numeric page id. You can find these within the url while viewing the desired Confluence page.
+
+#### For example: https://**_<YOUR_DOMAIN>_**.atlassian.net/wiki//pages/**_<YOUR_PAGE_ID>_**/Example_Page_Name
+
 Then simply add "confluence" as an object to your story. And then add the domain and id as its properties:
 
 ```js
@@ -53,7 +76,7 @@ export const myStory = {
   parameters: {
     confluence: {
       id: 12345,
-      domain: "your-domain",
+      domain: "your-domain", // Optional if set globally
     },
   },
 };
