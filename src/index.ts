@@ -6,20 +6,18 @@ const CONFLUENCE_AUTHORIZATION = Buffer.from(
 ).toString("base64");
 
 const fetchPage = async (auth: string, url: string) => {
-
   const response = await fetch(url, {
     method: "GET",
     headers: {
       Authorization: `Basic ${auth}`,
     },
   });
-  
+
   if (!response.ok) {
     throw new Error(`Failed to fetch page: ${response.statusText}`);
   }
 
   return response;
-
 };
 
 const getConfluencePage = async (
@@ -27,14 +25,16 @@ const getConfluencePage = async (
   res: Response,
   next: NextFunction,
 ): Promise<void> => {
-
   try {
-
     // Missing authorization handling.
-    if (!process.env.CONFLUENCE_EMAIL || !process.env.CONFLUENCE_TOKEN){
-      console.error("addon-confluence Error: Missing authorization.")
-      res.locals.page = "<p>Error: Missing authorization. Ensure you are using a valid email and token.</p>"
-
+    const { CONFLUENCE_EMAIL, CONFLUENCE_TOKEN } = process.env;
+    if (!CONFLUENCE_EMAIL || !CONFLUENCE_TOKEN) {
+      res.locals.page =
+        !CONFLUENCE_EMAIL && !CONFLUENCE_TOKEN
+          ? `<p>Error: Missing or invalid email and token. Ensure you are using valid credentials.</p>`
+          : !CONFLUENCE_EMAIL
+            ? `<p>Error: Missing or invalid confluence email. Ensure you are using a valid email.</p>`
+            : `<p>Error: Missing or invalid confluence token. Ensure you are using a valid API token.</p>`;
       return next();
     }
 
@@ -44,19 +44,15 @@ const getConfluencePage = async (
     const response = await fetchPage(CONFLUENCE_AUTHORIZATION, url);
     const data = await response.json();
 
-    res.locals.page = data.body.view.value || "<p>No content found.</p>"
+    res.locals.page = data.body?.view?.value || "<p>No content found.</p>";
 
     next();
-
-  } 
-  
-  catch (error) {
-
+  } catch (error) {
     console.error("Error: In getConfluencePage middleware", error);
-    res.locals.page = "<p>No Confluence page found. Ensure parameters are correct.</p>";
+    res.locals.page =
+      "<p>No Confluence page found. Ensure parameters are correct.</p>";
 
     next();
-
   }
 };
 
