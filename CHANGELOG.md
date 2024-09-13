@@ -1,3 +1,15 @@
+# v0.0.25 (Fri Sep 13 2024)
+
+#### 🐛 Bug Fix
+
+- [Breaking Change]  prefix the env variables [#11](https://github.com/Ezmr7/addon-confluence/pull/11) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.24 (Fri Sep 13 2024)
 
 #### 🐛 Bug Fix
