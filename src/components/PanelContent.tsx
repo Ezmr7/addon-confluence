@@ -16,7 +16,11 @@ export const PanelContent = ({
     const loadPageData = async () => {
       if (!page.id || !page.domain) {
         setData(
-          '<div style="color: inherit; font-size: 125%;"><p>Missing Confluence id or domain parameters. Please refer to the <a href="https://storybook.js.org/addons/addon-confluence">documentation</a>.</p></div>',
+          !page.id && !page.domain
+            ? '<div style="color: inherit; font-size: 125%;"><p>Missing Confluence id and domain. Please refer to the <a href="https://storybook.js.org/addons/addon-confluence">documentation</a>.</p></div>'
+            : !page.id
+              ? '<div style="color: inherit; font-size: 125%;"><p>Missing Confluence id. Ensure you provide a valid id.</p></div>'
+              : '<div style="color: inherit; font-size: 125%;"><p>Missing Confluence domain. Ensure you provide a valid domain.</p></div>',
         );
         return;
       }
@@ -33,7 +37,7 @@ export const PanelContent = ({
               height: auto;
             }
             a {
-              color: #2575ed;
+              color: #2575ED;
             }
             .pageFrame-content {
               padding: 16px;
@@ -49,10 +53,8 @@ export const PanelContent = ({
         );
       }
     };
-
     loadPageData();
   }, [page.id, page.domain]);
-
   return (
     <div
       id="pageFrame"
