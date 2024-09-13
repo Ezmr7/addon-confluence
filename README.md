@@ -108,3 +108,6 @@ jobs:
 ```
 
 By adding this configuration, your Storybook environment variables will be correctly injected during the Chromatic deployment process.
+
+![Example Image - Storybook - Confluence-addon](https://github.com/user-attachments/assets/b261b398-4eee-4b1b-8cb9-6713109fe116)
+
