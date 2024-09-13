@@ -27,8 +27,8 @@ export default {
 #### Go to this [link](https://id.atlassian.com/manage-profile/security/api-tokens) and create an API Token for your account. Then add it along with the email for your account to a .env file as so.
 
 ```env
-CONFLUENCE_EMAIL=youremail@example.com
-CONFLUENCE_TOKEN=YourTokenHere!
+STORYBOOK_CONFLUENCE_EMAIL=youremail@example.com
+STORYBOOK_CONFLUENCE_TOKEN=YourTokenHere!
 ```
 
 ### 4. Add a middleware.js file to your .storybook folder, and copy this code to it
@@ -81,3 +81,30 @@ export const myStory = {
   },
 };
 ```
+
+### 7. Injecting Environment Variables in GitHub Actions
+
+Start by adding a new secret to your GitHub repository. Navigate to your repository on GitHub, click on the "Settings" tab, and then click on "Secrets" in the left-hand sidebar. Click on the "New repository secret" button, and add the following secrets:
+
+- `STORYBOOK_CONFLUENCE_EMAIL`: The email address associated with your Confluence account.
+- `STORYBOOK_CONFLUENCE_TOKEN`: The API token generated for your Confluence account.
+
+If you are using Chromatic for deployment and need to inject environment variables into your hosted Storybook, update your .github/workflows/chromatic.yml file as follows:
+
+```yml
+.github/workflows/chromatic.yml
+jobs:
+  chromatic:
+    steps:
+      # ... other steps
+
+      - uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        env:
+          # 👇 Sets the environment variable
+          STORYBOOK_CONFLUENCE_EMAIL: ${{ secrets.STORYBOOK_CONFLUENCE_EMAIL }}
+          STORYBOOK_CONFLUENCE_TOKEN: ${{ secrets.STORYBOOK_CONFLUENCE_TOKEN }}
+```
+
+By adding this configuration, your Storybook environment variables will be correctly injected during the Chromatic deployment process.

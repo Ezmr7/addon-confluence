@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 require("dotenv").config();
 
 const CONFLUENCE_AUTHORIZATION = Buffer.from(
-  `${process.env.CONFLUENCE_EMAIL}:${process.env.CONFLUENCE_TOKEN}`,
+  `${process.env.STORYBOOK_CONFLUENCE_EMAIL}:${process.env.STORYBOOK_CONFLUENCE_TOKEN}`,
 ).toString("base64");
 
 const fetchPage = async (auth: string, url: string) => {
@@ -26,8 +26,13 @@ const getConfluencePage = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    // Missing authorization handling.
-    const { CONFLUENCE_EMAIL, CONFLUENCE_TOKEN } = process.env;
+    const CONFLUENCE_EMAIL =
+      process.env.STORYBOOK_CONFLUENCE_EMAIL || process.env.CONFLUENCE_EMAIL;
+
+    const CONFLUENCE_TOKEN =
+      process.env.STORYBOOK_CONFLUENCE_TOKEN || process.env.CONFLUENCE_TOKEN;
+
+    // Missing authorization handling
     if (!CONFLUENCE_EMAIL || !CONFLUENCE_TOKEN) {
       res.locals.page =
         !CONFLUENCE_EMAIL && !CONFLUENCE_TOKEN
