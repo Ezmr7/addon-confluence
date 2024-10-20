@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParameter } from "@storybook/manager-api";
 
+interface IConfluencePage {
+  content: string;
+}
+
 export const PanelContent = () => {
   const [data, setData] = useState("<p>Loading...</p>");
   const page = useParameter("confluence", null);
@@ -20,12 +24,21 @@ export const PanelContent = () => {
 
     const loadContent = async () => {
       try {
-        // Adjust the path based on the location of PanelContent.tsx
-        const contentModule = await import(
-          `../../../confluence-pages/${domain}/${id}.json`
-        );
-        const content = contentModule.default.content;
-        setData(content);
+        // Use import.meta.glob to import all JSON files under confluence-pages
+        const modules = import.meta.glob("@confluence-pages/**/*.json");
+
+        // Construct the relative path
+        const path = `/confluence-pages/${domain}/${id}.json`;
+
+        if (modules[path]) {
+          // Import the specific module
+          const contentModule = await modules[path]();
+          // @ts-ignore
+          const content = contentModule.content;
+          setData(content);
+        } else {
+          setData("<p>Content not found.</p>");
+        }
       } catch (error) {
         console.error("Error loading content:", error);
         setData("<p>Error loading content.</p>");
