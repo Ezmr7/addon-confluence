@@ -14,5 +14,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  staticDirs: ["../confluence-pages"],
 };
 export default config;
