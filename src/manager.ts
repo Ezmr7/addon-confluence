@@ -7,7 +7,7 @@ import { Panel } from "./Panel";
  * and update the entry prop in tsup.config.ts to use "src/manager.tsx",
  */
 
-  // Register the panel
+// Register the panel
 addons.register(ADDON_ID, (api) => {
   addons.add(PANEL_ID, {
     type: types.PANEL,
