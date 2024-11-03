@@ -1,6 +1,6 @@
 {
   "name": "addon-confluence",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "An addon to implement Confluence documentation in StoryBook.",
   "keywords": [
     "storybook-addons",
