@@ -15,30 +15,41 @@ export const PanelContent = () => {
       return;
     }
 
-    const { id, domain } = page;
+    const { id } = page;
 
-    if (!id || !domain) {
-      setData("<p>Missing Confluence id or domain.</p>");
+    if (!id) {
+      setData("<p>Missing Confluence id in story config.</p>");
       return;
     }
 
     const loadContent = async () => {
       try {
-        // Use import.meta.glob to import all JSON files under confluence-pages
-        const modules = import.meta.glob("@confluence-pages/**/*.json");
+        const fetchUrl = `/confluence-pages/${id}.json`;
 
-        // Construct the relative path
-        const path = `/confluence-pages/${domain}/${id}.json`;
-
-        if (modules[path]) {
-          // Import the specific module
-          const contentModule = await modules[path]();
-          // @ts-ignore
-          const content = contentModule.content;
-          setData(content);
-        } else {
+        const response = await fetch(fetchUrl);
+        if (!response.ok) {
+          console.error(`Failed to fetch ${fetchUrl}: ${response.statusText}`);
           setData("<p>Content not found.</p>");
+          return;
         }
+        const json: IConfluencePage = await response.json();
+        setData(`
+          <style>
+            .confluence-embedded-image.image-center {
+              max-width: 100%;
+              height: auto;
+            }
+            a {
+              color: #2575ED;
+            }
+            .pageFrame-content {
+              padding: 16px;
+            }
+          </style>
+          <div style="color: inherit; background-color: inherit; font-size: 125%; padding: 16px;" class="confluence-embedded-image image-center">
+            ${json.content}
+          </div>
+        `);
       } catch (error) {
         console.error("Error loading content:", error);
         setData("<p>Error loading content.</p>");
@@ -48,5 +59,11 @@ export const PanelContent = () => {
     loadContent();
   }, [page]);
 
-  return <div dangerouslySetInnerHTML={{ __html: data }} />;
+  return (
+    <div
+      id="pageFrame"
+      className="pageFrame-content"
+      dangerouslySetInnerHTML={{ __html: data }}
+    />
+  );
 };

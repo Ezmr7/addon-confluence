@@ -13,8 +13,7 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   parameters: {
     confluence: {
-      id: 164310,
-      domain: 'ezekielmohr27'
+      id: 4166582285,
     },
     myAddonParameter: `
 <MyComponent boolProp scalarProp={1} complexProp={{ foo: 1, bar: '2' }}>

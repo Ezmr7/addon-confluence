@@ -12,8 +12,7 @@
     "isolatedModules": true,
     "jsx": "react",
     "lib": ["es2020", "dom"],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
     "noImplicitAny": true,
     "rootDir": "./src",
     "skipLibCheck": true,
@@ -21,5 +20,5 @@
     "types": ["vite/client"],
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "scripts/fetchDocs.js"]
 }

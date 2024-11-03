@@ -1,9 +1,9 @@
-// fetchDocs.js
 import fs from "fs";
 import path from "path";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
+import { default as pages } from "../.storybook/confluence.js";
 
 dotenv.config();
 
@@ -31,16 +31,16 @@ const fetchPageContent = async (domain, id) => {
 };
 
 const main = async () => {
-  const pages = [
-    // Add your (domain, id) pairs here
-    { domain: "thetower", id: "4166582285" },
-    // Add more entries as needed
-  ];
-
   for (const { domain, id } of pages) {
     try {
       const content = await fetchPageContent(domain, id);
-      const dir = path.join(__dirname, "..", "confluence-pages", domain);
+      const dir = path.join(
+        __dirname,
+        "..",
+        ".storybook",
+        "public",
+        "confluence-pages",
+      );
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(
         path.join(dir, `${id}.json`),

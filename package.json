@@ -38,12 +38,14 @@
   "scripts": {
     "build": "tsup",
     "build:watch": "npm run build -- --watch",
+    "clean": "rimraf dist node_modules storybook-static",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "run-p build:watch \"storybook --quiet\"",
     "prerelease": "zx scripts/prepublish-checks.js",
     "release": "npm run build && auto shipit",
     "eject-ts": "zx scripts/eject-typescript.js",
     "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "node scripts/fetchDocs.js",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
