@@ -1,3 +1,15 @@
+# v0.0.26 (Sun Nov 03 2024)
+
+#### 🐛 Bug Fix
+
+- Implement Build-Time Confluence Documentation Fetching for Storybook Add-On [#13](https://github.com/Ezmr7/addon-confluence/pull/13) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.25 (Fri Sep 13 2024)
 
 #### 🐛 Bug Fix
