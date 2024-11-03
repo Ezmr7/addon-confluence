@@ -4,7 +4,7 @@ import type {
   PartialStoryFn as StoryFunction,
 } from "@storybook/types";
 import { STORY_CHANGED } from "@storybook/core-events";
-import { EVENTS } from "./constants.js";
+import { EVENTS } from "./constants";
 
 export const withRoundTrip = (storyFn: StoryFunction<Renderer>) => {
   const emit = useChannel({

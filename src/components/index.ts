@@ -1,1 +1,1 @@
-export * from "./PanelContent.js";
+export * from "./PanelContent";

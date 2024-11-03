@@ -5,11 +5,11 @@ import type {
 } from "@storybook/types";
 
 import { useEffect, useMemo, useGlobals } from "@storybook/preview-api";
-import { PARAM_KEY } from "./constants.js";
+import { PARAM_KEY } from "./constants";
 
-import { clearStyles, addOutlineStyles } from "./helpers.js";
+import { clearStyles, addOutlineStyles } from "./helpers";
 
-import outlineCSS from "./OutlineCSS.js";
+import outlineCSS from "./OutlineCSS";
 
 export const withGlobals = (
   StoryFn: StoryFunction<Renderer>,
