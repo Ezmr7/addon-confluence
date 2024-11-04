@@ -29,11 +29,15 @@
     "./manager": "./dist/manager.js",
     "./package.json": "./package.json"
   },
+  "bin": {
+    "fetchDocs": "dist/fetchDocs.js"
+  },
   "files": [
     "dist/**/*",
     "README.md",
     "*.js",
-    "*.d.ts"
+    "*.d.ts",
+    "scripts/**/*"
   ],
   "scripts": {
     "build": "tsup",
@@ -88,7 +92,8 @@
   },
   "bundler": {
     "exportEntries": [
-      "src/index.ts"
+      "src/index.ts",
+      "scripts/fetchDocs.js"
     ],
     "managerEntries": [
       "src/manager.ts"

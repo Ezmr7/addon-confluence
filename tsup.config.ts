@@ -4,8 +4,12 @@ import { globalPackages as globalManagerPackages } from "@storybook/manager/glob
 import { globalPackages as globalPreviewPackages } from "@storybook/preview/globals";
 
 // The current browsers supported by Storybook v7
-const BROWSER_TARGET: Options['target'] = ["chrome100", "safari15", "firefox91"];
-const NODE_TARGET: Options['target'] = ["node18"];
+const BROWSER_TARGET: Options["target"] = [
+  "chrome100",
+  "safari15",
+  "firefox91",
+];
+const NODE_TARGET: Options["target"] = ["node18"];
 
 type BundlerConfig = {
   bundler?: {
@@ -27,10 +31,12 @@ export default defineConfig(async (options) => {
   //     "nodeEntries": ["./src/preset.ts"]
   //   }
   // }
-  const packageJson = await readFile('./package.json', 'utf8').then(JSON.parse) as BundlerConfig;
+  const packageJson = (await readFile("./package.json", "utf8").then(
+    JSON.parse,
+  )) as BundlerConfig;
   const {
     bundler: {
-      exportEntries = [],
+      exportEntries = ["src/index.ts", "scripts/fetchDocs.js"],
       managerEntries = [],
       previewEntries = [],
       nodeEntries = [],
@@ -51,16 +57,37 @@ export default defineConfig(async (options) => {
   // they are not meant to be loaded by the manager or preview
   // they'll be usable in both node and browser environments, depending on which features and modules they depend on
   if (exportEntries.length) {
-    configs.push({
-      ...commonConfig,
-      entry: exportEntries,
-      dts: {
-        resolve: true,
-      },
-      format: ["esm", "cjs"],
-      target: [...BROWSER_TARGET, ...NODE_TARGET],
-      platform: "neutral",
-      external: [...globalManagerPackages, ...globalPreviewPackages],
+    exportEntries.forEach((entry) => {
+      if (entry.endsWith(".js")) {
+        configs.push({
+          ...commonConfig,
+          entry: [entry],
+          dts: false,
+          bundle: false, // Do not bundle dependencies
+          format: ["cjs"],
+          target: NODE_TARGET,
+          platform: "node",
+          external: [
+            "dotenv",
+            "node-fetch",
+            ...globalManagerPackages,
+            ...globalPreviewPackages,
+          ],
+        });
+      } else {
+        // Assume regular export entry
+        configs.push({
+          ...commonConfig,
+          entry: [entry],
+          dts: {
+            resolve: true,
+          },
+          format: ["esm", "cjs"],
+          target: [...BROWSER_TARGET, ...NODE_TARGET],
+          platform: "neutral",
+          external: [...globalManagerPackages, ...globalPreviewPackages],
+        });
+      }
     });
   }
 

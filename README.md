@@ -71,7 +71,28 @@ const confluence = [
 export default confluence;
 ```
 
-### 6. Injecting Environment Variables in GitHub Actions
+### 6. Update package.json Scripts
+
+#### To ensure that the fetchDocs script runs automatically before building Storybook, you need to update your project’s package.json by adding the prestorybook:build script and ensuring that cross-env is installed. Follow these steps:
+
+a. Add Scripts to package.json
+
+### Open your project’s package.json file and add the following scripts under the "scripts" section:
+
+```js
+{
+  "scripts": {
+    // ... other scripts
+   "prebuild-storybook": "fetchDocs",
+    "storybook:build": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",
+    // ... other scripts
+  }
+}
+```
+
+If you have a different build script, prerfix `pre` to your build script. and set the value to `fetchDocs` as shown above.
+
+### 7. Injecting Environment Variables in GitHub Actions
 
 Start by adding a new secret to your GitHub repository. Navigate to your repository on GitHub, click on the "Settings" tab, and then click on "Secrets" in the left-hand sidebar. Click on the "New repository secret" button, and add the following secrets:
 
