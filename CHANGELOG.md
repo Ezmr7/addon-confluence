@@ -1,3 +1,15 @@
+# v0.0.27 (Mon Nov 04 2024)
+
+#### 🐛 Bug Fix
+
+- [FIX] Build Script and Updated README [#14](https://github.com/Ezmr7/addon-confluence/pull/14) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.26 (Sun Nov 03 2024)
 
 #### 🐛 Bug Fix
