@@ -30,7 +30,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "fetchDocs": "dist/fetchDocs.js"
+    "fetchDocs": "node ./dist/fetchDocs.js"
   },
   "files": [
     "dist/**/*",
