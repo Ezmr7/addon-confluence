@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    "npm",
+    "conventional-commits"
+  ],
+  "noVersionPrefix": true,
+  "prereleaseBranches": [
+    "main"
+  ]
+}
