@@ -2,15 +2,10 @@
 
 import fs from "fs";
 import path from "path";
-import fetch from "node-fetch";
 import dotenv from "dotenv";
-import { fileURLToPath } from "url";
-import { default as pages } from "../.storybook/confluence.js";
+import fetch from "node-fetch";
 
 dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const CONFLUENCE_AUTHORIZATION = Buffer.from(
   `${process.env.STORYBOOK_CONFLUENCE_EMAIL}:${process.env.STORYBOOK_CONFLUENCE_TOKEN}`,
@@ -33,12 +28,33 @@ const fetchPageContent = async (domain, id) => {
 };
 
 const main = async () => {
+  // Resolve the path to your project's confluence.js file
+  const confluenceConfigPath = path.join(
+    process.cwd(),
+    ".storybook",
+    "confluence.js",
+  );
+  let pages;
+
+  try {
+    // Use dynamic import to load the configuration
+    const configModule = await import(`file://${confluenceConfigPath}`);
+
+    // Access the default export or the module exports
+    pages = configModule.default || configModule;
+  } catch (error) {
+    console.error(
+      `Error loading confluence configuration from ${confluenceConfigPath}:`,
+      error,
+    );
+    process.exit(1);
+  }
+
   for (const { domain, id } of pages) {
     try {
       const content = await fetchPageContent(domain, id);
       const dir = path.join(
-        __dirname,
-        "..",
+        process.cwd(),
         ".storybook",
         "public",
         "confluence-pages",
