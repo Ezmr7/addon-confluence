@@ -3,6 +3,8 @@
     "npm",
     "conventional-commits"
   ],
-  "prereleaseBranches": [],
-  "noVersionPrefix": true
+  "noVersionPrefix": true,
+  "prereleaseBranches": [
+    "main"
+  ]
 }
