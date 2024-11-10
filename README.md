@@ -83,14 +83,30 @@ a. Add Scripts to package.json
 {
   "scripts": {
     // ... other scripts
-   "prebuild-storybook": "fetchDocs",
+   "prebuild-storybook": "fetchDocs", .// Add this line
     "storybook:build": "cross-env NODE_OPTIONS=--openssl-legacy-provider storybook build",
     // ... other scripts
   }
 }
 ```
 
-If you have a different build script, prerfix `pre` to your build script. and set the value to `fetchDocs` as shown above.
+### If you have a different build script, prerfix `pre` to your build script. and set the value to `fetchDocs` as shown above.
+
+b. Configure Storybook to Serve Static Files
+
+To ensure that the Confluence documentation is accessible to your Storybook application, you need to configure Storybook to serve the public directory where the fetched documentation is stored.
+
+Add the staticDirs configuration to your .storybook/main.js file:
+
+```js
+// .storybook/main.js
+
+module.exports = {
+  // ... other Storybook configurations
+  addons: ["addon-confluence"],
+  staticDirs: ["public"], // Add this line to serve the 'public' directory
+};
+```
 
 ### 7. Injecting Environment Variables in GitHub Actions
 
