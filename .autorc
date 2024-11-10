@@ -6,5 +6,6 @@
   "noVersionPrefix": true,
   "prereleaseBranches": [
     "main"
-  ]
+  ],
+  "canary": false
 }
