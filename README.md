@@ -4,7 +4,7 @@ An addon to implement Confluence documentation in Storybook.
 
 ## Getting started
 
-### 1. Install
+## 1. Install
 
 ```sh
 npm install -D addon-confluence
@@ -14,7 +14,7 @@ yarn add -D addon-confluence
 pnpm add -D addon-confluence
 ```
 
-### 2. Register the addon in `.storybook/main.js"
+## 2. Register the addon in `.storybook/main.js"
 
 ```js
 export default {
@@ -22,7 +22,7 @@ export default {
 };
 ```
 
-### 3. Create a token for Confluence!
+## 3. Create a token for Confluence!
 
 #### Go to this [link](https://id.atlassian.com/manage-profile/security/api-tokens) and create an API Token for your account. Then add it along with the email for your account to a .env file as so.
 
@@ -31,7 +31,7 @@ STORYBOOK_CONFLUENCE_EMAIL=youremail@example.com
 STORYBOOK_CONFLUENCE_TOKEN=YourTokenHere!
 ```
 
-### 4. Add a confluence ID to your story!
+## 4. Add a confluence ID to your story!
 
 #### Next, we need add a page id to the story. You can find this within the url while viewing the desired Confluence page. We only need the `id` for this step but we will need `your_domain` for the next step.
 
@@ -54,7 +54,7 @@ export const myStory = {
 };
 ```
 
-### 5. Add a confluence.js file to your .storybook directory.
+## 5. Add a confluence.js file to your .storybook directory.
 
 #### The file name must be "confluence.js". This will be the target for the script that fetches the documentation at build time. The default export must be an array of objects with `domain` and `id` keys.
 
@@ -71,11 +71,9 @@ const confluence = [
 export default confluence;
 ```
 
-### 6. Update package.json Scripts
+## 6. Add Scripts to package.json
 
 #### To ensure that the fetchDocs script runs automatically before building Storybook, you need to update your project’s package.json by adding the prestorybook:build script and ensuring that cross-env is installed. Follow these steps:
-
-a. Add Scripts to package.json
 
 ### Open your project’s package.json file and add the following scripts under the "scripts" section:
 
@@ -92,11 +90,11 @@ a. Add Scripts to package.json
 
 ### If you have a different build script, prerfix `pre` to your build script. and set the value to `fetchDocs` as shown above.
 
-b. Configure Storybook to Serve Static Files
+## 7. Configure Storybook to Serve Static Files
 
-To ensure that the Confluence documentation is accessible to your Storybook application, you need to configure Storybook to serve the public directory where the fetched documentation is stored.
+### To ensure that the Confluence documentation is accessible to your Storybook application, you need to configure Storybook to serve the public directory where the fetched documentation is stored.
 
-Add the staticDirs configuration to your .storybook/main.js file:
+### Add the staticDirs configuration to your .storybook/main.js file:
 
 ```js
 // .storybook/main.js
@@ -108,7 +106,7 @@ module.exports = {
 };
 ```
 
-### 7. Injecting Environment Variables in GitHub Actions
+## 8. Injecting Environment Variables in GitHub Actions
 
 Start by adding a new secret to your GitHub repository. Navigate to your repository on GitHub, click on the "Settings" tab, and then click on "Secrets" in the left-hand sidebar. Click on the "New repository secret" button, and add the following secrets:
 

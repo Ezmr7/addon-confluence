@@ -51,19 +51,26 @@ const main = async () => {
   }
 
   for (const { domain, id } of pages) {
+    const outputDir = path.join(
+      process.cwd(),
+      ".storybook",
+      "public",
+      "confluence-pages",
+    );
+    const outputFilePath = path.join(outputDir, `${id}.json`);
+
+    // Check if the JSON file already exists
+    if (fs.existsSync(outputFilePath)) {
+      console.log(
+        `Documentation for page ${id} already exists. Skipping fetch.`,
+      );
+      continue; // Skip fetching this page
+    }
+
     try {
       const content = await fetchPageContent(domain, id);
-      const dir = path.join(
-        process.cwd(),
-        ".storybook",
-        "public",
-        "confluence-pages",
-      );
-      fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(
-        path.join(dir, `${id}.json`),
-        JSON.stringify({ content }),
-      );
+      fs.mkdirSync(outputDir, { recursive: true });
+      fs.writeFileSync(outputFilePath, JSON.stringify({ content }, null, 2));
       console.log(`Fetched and saved page ${id} from domain ${domain}`);
     } catch (error) {
       console.error(`Error fetching page ${id} from domain ${domain}:`, error);
