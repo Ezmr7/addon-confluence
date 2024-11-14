@@ -1,3 +1,26 @@
+# v0.0.28 (Thu Nov 14 2024)
+
+#### 🐛 Bug Fix
+
+- [Caching] Check for documentation before fetching [#20](https://github.com/Ezmr7/addon-confluence/pull/20) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- [README] updating versioning and readme [#19](https://github.com/Ezmr7/addon-confluence/pull/19) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- [Dynamic path] - use dynamic path to locate storybook directory [#18](https://github.com/Ezmr7/addon-confluence/pull/18) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- [Versioning] attempting to fix npm versioning [#17](https://github.com/Ezmr7/addon-confluence/pull/17) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- [FIX] adjust file extension in export dist directory [#16](https://github.com/Ezmr7/addon-confluence/pull/16) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### ⚠️ Pushed to `main`
+
+- bumping version ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- removing autorc file ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- adding yarn.lock ([@joshrobertsv2](https://github.com/joshrobertsv2))
+- revert action syntax ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.27 (Mon Nov 04 2024)
 
 #### 🐛 Bug Fix
