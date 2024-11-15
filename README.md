@@ -6,7 +6,7 @@ An addon to implement Confluence documentation in Storybook.
 
 ### Walkthrough Video Tutorial
 
-[![Watch the video](https://www.loom.com/share/5d0869d5ee264ba8bdda225e70f715f7?sid=619b1b19-e6f3-444e-ac91-3e21d26ae113)]
+[![Watch the video](https://www.loom.com/share/5d0869d5ee264ba8bdda225e70f715f7?sid=619b1b19-e6f3-444e-ac91-3e21d26ae113)](https://www.loom.com/share/5d0869d5ee264ba8bdda225e70f715f7?sid=619b1b19-e6f3-444e-ac91-3e21d26ae113)
 
 ## 1. Install
 
