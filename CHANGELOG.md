@@ -1,3 +1,15 @@
+# v0.0.32 (Fri Nov 15 2024)
+
+#### 🐛 Bug Fix
+
+- [Updating README] [#21](https://github.com/Ezmr7/addon-confluence/pull/21) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.28 (Thu Nov 14 2024)
 
 #### 🐛 Bug Fix
