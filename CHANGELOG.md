@@ -1,3 +1,15 @@
+# v0.0.33 (Fri Nov 22 2024)
+
+#### 🐛 Bug Fix
+
+- [Core]Optimize Confluence Documentation Fetching by Implementing Update Checks [#22](https://github.com/Ezmr7/addon-confluence/pull/22) ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+#### Authors: 1
+
+- Josh Roberts ([@joshrobertsv2](https://github.com/joshrobertsv2))
+
+---
+
 # v0.0.32 (Fri Nov 15 2024)
 
 #### 🐛 Bug Fix
