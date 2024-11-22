@@ -11,7 +11,7 @@ const CONFLUENCE_AUTHORIZATION = Buffer.from(
   `${process.env.STORYBOOK_CONFLUENCE_EMAIL}:${process.env.STORYBOOK_CONFLUENCE_TOKEN}`,
 ).toString("base64");
 
-const fetchPageContent = async (domain, id) => {
+const fetchPageMetadata = async (domain, id) => {
   const url = `https://${domain}.atlassian.net/wiki/api/v2/pages/${id}?body-format=view`;
   const response = await fetch(url, {
     headers: {
@@ -20,11 +20,16 @@ const fetchPageContent = async (domain, id) => {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch page ${id}: ${response.statusText}`);
+    throw new Error(
+      `Failed to fetch metadata for page ${id}: ${response.statusText}`,
+    );
   }
 
   const data = await response.json();
-  return data.body?.view?.value || "<p>No content found.</p>";
+  return {
+    createdAt: data?.version?.createdAt,
+    body: data.body?.view?.value || "<p>No content found.</p>",
+  };
 };
 
 const main = async () => {
@@ -59,21 +64,53 @@ const main = async () => {
     );
     const outputFilePath = path.join(outputDir, `${id}.json`);
 
-    // Check if the JSON file already exists
-    if (fs.existsSync(outputFilePath)) {
-      console.log(
-        `Documentation for page ${id} already exists. Skipping fetch.`,
-      );
-      continue; // Skip fetching this page
-    }
-
     try {
-      const content = await fetchPageContent(domain, id);
-      fs.mkdirSync(outputDir, { recursive: true });
-      fs.writeFileSync(outputFilePath, JSON.stringify({ content }, null, 2));
-      console.log(`Fetched and saved page ${id} from domain ${domain}`);
+      const { createdAt, body } = await fetchPageMetadata(domain, id);
+
+      let shouldFetch = false;
+      let storedData = {};
+
+      if (fs.existsSync(outputFilePath)) {
+        try {
+          const fileContent = fs.readFileSync(outputFilePath, "utf-8");
+          storedData = JSON.parse(fileContent);
+          const storedCreatedAt = storedData.createdAt;
+
+          if (
+            !storedCreatedAt ||
+            new Date(createdAt) > new Date(storedCreatedAt)
+          ) {
+            shouldFetch = true;
+            console.info(`Page ${id} has been updated. Fetching new content.`);
+          } else {
+            console.info(`Page ${id} is up-to-date. Skipping fetch.`);
+          }
+        } catch (readError) {
+          console.warn(
+            `Failed to read or parse ${outputFilePath}. Refetching page ${id}.`,
+          );
+          shouldFetch = true;
+        }
+      } else {
+        shouldFetch = true;
+        console.info(`Page ${id} does not exist locally. Fetching content.`);
+      }
+
+      if (shouldFetch) {
+        // If the page needs to be fetched (new or updated)
+        fs.mkdirSync(outputDir, { recursive: true });
+        const dataToStore = {
+          createdAt,
+          content: body,
+        };
+        fs.writeFileSync(outputFilePath, JSON.stringify(dataToStore, null, 2));
+        console.info(`Fetched and saved page ${id} from domain ${domain}`);
+      }
     } catch (error) {
-      console.error(`Error fetching page ${id} from domain ${domain}:`, error);
+      console.error(
+        `Error processing page ${id} from domain ${domain}:`,
+        error,
+      );
     }
   }
 };
